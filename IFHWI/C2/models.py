@@ -5,7 +5,7 @@ from django.db import models
 class Agent(models.Model):
     name = models.CharField(max_length=50)
     is_active = models.BooleanField(default=True)
-    last_online = models.DateTimeField(auto_now=True)
+    last_online = models.DateTimeField()
     host = models.CharField(max_length=50)  
     ip = models.CharField(max_length=50)
     port = models.IntegerField()

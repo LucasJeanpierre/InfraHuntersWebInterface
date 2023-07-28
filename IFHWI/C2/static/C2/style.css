@@ -3,3 +3,73 @@
     padding: 0;
     box-sizing: border-box;
 }
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('Roboto-Regular.ttf');
+}
+
+body {
+    font-family: 'Roboto';
+}
+
+.AgentsTable {
+    width: 100%;
+}
+
+.AgentsTable td {
+    text-align: center;
+}
+
+.AgentsTable th {
+    text-align: center;
+}
+
+.AgentsTable tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.AgentsTable tr:hover {
+    background-color: #ddd;
+    cursor: pointer !important;
+}
+
+.AgentsTable th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.AgentsTable ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+h1 {
+    padding: 20px;
+    text-align: center;
+}
+
+
+.AgentInfo {
+    padding: 20px;
+}
+
+.commandButton {
+    background-color: #838383;
+    margin: 2px;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    display: flex;
+}
+
+.commandButton:hover {
+    background-color: #444444;
+    cursor: pointer;
+}

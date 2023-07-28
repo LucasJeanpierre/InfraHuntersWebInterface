@@ -1,0 +1,29 @@
+{% extends 'C2/base.html' %}
+{% block content %}
+
+<h1>{{ agent.name }}</h1>
+
+<h2>Agent info</h2>
+
+<ul class="AgentInfo">
+    <li><b>Is Active:</b> {{ agent.is_active }}</li>
+    <li><b>Last Online:</b> {{ agent.last_online }}</li>
+    <li><b>Host:</b> {{ agent.host }}</li>
+    <li><b>IP:</b> {{ agent.ip }}</li>
+    <li><b>Port:</b> {{ agent.port }}</li>
+    <li><b>OS:</b> {{ agent.os }}</li>
+    <li><b>OS Version:</b> {{ agent.os_version }}</li>
+    <li><b>Location:</b> {{ agent.location }}</li>
+    <li><b>Description:</b> {{ agent.description }}</li>
+    <li><b>Created at:</b> {{ agent.created }}</li>
+</ul>
+
+<h2>Agent Command list</h2>
+
+{% for command in agent.command_list %}
+<button class="commandButton">
+    {{ command.name }}
+</button>
+{% endfor %}
+
+{% endblock %}

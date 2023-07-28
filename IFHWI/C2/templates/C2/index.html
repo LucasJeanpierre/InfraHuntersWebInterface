@@ -1,10 +1,12 @@
 {% extends 'C2/base.html' %}
 {% block content %}
 
-<table>
+<h1>Agents list</h1>
+
+<table class="AgentsTable">
     <tr>
         <th>Name</th>
-        <th>Is aAtive</th>
+        <th>Is Ative</th>
         <th>Last Online</th>
         <th>Host</th>
         <th>IP</th>
@@ -17,9 +19,15 @@
         <th>Commands</th>
     </tr>
     {% for agent in agents %}
-    <tr>
+    <tr id="{{ agent.id }}" onclick="openAgent()">
         <td>{{ agent.name }}</td>
-        <td>{{ agent.is_active }}</td>
+        <td>
+            {% if agent.is_active %}
+            <input type="checkbox" checked>
+            {% else %}
+            <input type="checkbox">
+            {% endif %}
+        </td>
         <td>{{ agent.last_online }}</td>
         <td>{{ agent.host }}</td>
         <td>{{ agent.ip }}</td>
@@ -28,7 +36,7 @@
         <td>{{ agent.os_version }}</td>
         <td>{{ agent.location }}</td>
         <td>{{ agent.description }}</td>
-        <td>{{ agent.created_at }}</td>
+        <td>{{ agent.created }}</td>
         <td>
             <ul>
                 {% for command in agent.command_list %}
@@ -39,6 +47,13 @@
     </tr>
     {% endfor %}
 </table>
+
+<script>
+    function openAgent() {
+        var agentId = event.target.parentElement.id;
+        window.location.href = '/agent/?id=' + agentId;
+    }
+</script>
 
 
 {% endblock %}

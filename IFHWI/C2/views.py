@@ -15,3 +15,15 @@ def index(request):
     }
 
     return render(request, context=context, template_name='C2/index.html')
+
+def agent(request):
+    agent_id = request.GET.get('id')
+    agent = Agent.objects.get(id=agent_id)
+
+    agent.command_list = agent.commands.all()
+
+    context = {
+        'agent': agent,
+    }
+
+    return render(request, context=context, template_name='C2/agent.html')
