@@ -1,0 +1,44 @@
+{% extends 'C2/base.html' %}
+{% block content %}
+
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Is aAtive</th>
+        <th>Last Online</th>
+        <th>Host</th>
+        <th>IP</th>
+        <th>Port</th>
+        <th>OS</th>
+        <th>OS Version</th>
+        <th>Location</th>
+        <th>Description</th>
+        <th>Created at</th>
+        <th>Commands</th>
+    </tr>
+    {% for agent in agents %}
+    <tr>
+        <td>{{ agent.name }}</td>
+        <td>{{ agent.is_active }}</td>
+        <td>{{ agent.last_online }}</td>
+        <td>{{ agent.host }}</td>
+        <td>{{ agent.ip }}</td>
+        <td>{{ agent.port }}</td>
+        <td>{{ agent.os }}</td>
+        <td>{{ agent.os_version }}</td>
+        <td>{{ agent.location }}</td>
+        <td>{{ agent.description }}</td>
+        <td>{{ agent.created_at }}</td>
+        <td>
+            <ul>
+                {% for command in agent.command_list %}
+                <li>{{ command.name }}</li>
+                {% endfor %}
+            </ul>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+
+{% endblock %}
