@@ -6,11 +6,14 @@
 <table class="AgentsTable">
     <tr>
         <th>Name</th>
+        <th>Type</th>
         <th>Is Ative</th>
         <th>Last Online</th>
         <th>Host</th>
         <th>IP</th>
         <th>Port</th>
+        <th>UID</th>
+        <th>GUID</th>
         <th>OS</th>
         <th>OS Version</th>
         <th>Location</th>
@@ -21,6 +24,7 @@
     {% for agent in agents %}
     <tr id="{{ agent.id }}" onclick="openAgent()">
         <td>{{ agent.name }}</td>
+        <td>{{ agent.type }}</td>
         <td>
             {% if agent.is_active %}
             <input type="checkbox" checked>
@@ -32,6 +36,8 @@
         <td>{{ agent.host }}</td>
         <td>{{ agent.ip }}</td>
         <td>{{ agent.port }}</td>
+        <td>{{ agent.uid }}</td>
+        <td>{{ agent.guid }}</td>
         <td>{{ agent.os }}</td>
         <td>{{ agent.os_version }}</td>
         <td>{{ agent.location }}</td>

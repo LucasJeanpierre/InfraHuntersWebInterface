@@ -8,7 +8,10 @@ def index(request):
     agents = Agent.objects.all()
 
     for agent in agents:
-        agent.command_list = agent.commands.all()
+        if agent.type:
+            agent.command_list = agent.type.commands.all()
+        else:
+            agent.command_list = []
 
     context = {
         'agents': agents,
@@ -20,7 +23,10 @@ def agent(request):
     agent_id = request.GET.get('id')
     agent = Agent.objects.get(id=agent_id)
 
-    agent.command_list = agent.commands.all()
+    if agent.type:
+        agent.command_list = agent.type.commands.all()
+    else:
+        agent.command_list = []
 
     context = {
         'agent': agent,
