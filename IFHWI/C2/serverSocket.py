@@ -24,9 +24,10 @@ def init(host, port):
 
     while True:
         try: 
-            data = conn.recv(1024).decode()
+            data = conn.recv(4096).decode()
             if not data:
                 break
+            print("Received:", data)
             data = json.loads(data)
             print("Received:", data["message"])
             channel_layer = get_channel_layer()

