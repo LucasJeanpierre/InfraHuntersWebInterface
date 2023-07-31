@@ -29,4 +29,33 @@
 </button>
 {% endfor %}
 
+<script>
+
+    const webSocket = new WebSocket('ws://localhost:8000/ws/notification/');
+
+    webSocket.onmessage = function (e) {
+        const data = JSON.parse(e.data);
+        console.log(data);
+    };
+
+    webSocket.onopen = function (e) {
+        console.log('Connection established!');
+        this.send(JSON.stringify({
+            'message': 'Hello World!'
+        }));
+    };
+
+    webSocket.onerror = function (e) {
+        console.log('Error occured!');
+    };
+
+    webSocket.onclose = function (e) {
+        console.log('Connection closed!');
+    };
+
+
+    
+</script>
+
+
 {% endblock %}
