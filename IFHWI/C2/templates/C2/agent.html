@@ -37,7 +37,7 @@
 
 <script>
 
-    const webSocket = new WebSocket('ws://localhost:8000/ws/notification/');
+    const webSocket = new WebSocket('ws://localhost:8000/ws/notification/?ip={{ agent.ip }}&port={{ agent.port }}');
 
     webSocket.onmessage = function (e) {
         const data = JSON.parse(e.data);

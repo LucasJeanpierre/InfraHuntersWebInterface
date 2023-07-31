@@ -11,10 +11,12 @@ from . import sharedSocket
 
 class NotificationConsumer(AsyncWebsocketConsumer):
     async def connect(self):
+        self.ip = self.scope["query_string"].decode().split("&")[0].split("=")[1]
+        self.port = int(self.scope["query_string"].decode().split("&")[1].split("=")[1])
         await self.channel_layer.group_add("notification", self.channel_name)
         await self.accept()
         await self.send(text_data=json.dumps({"message": "Connected to the server."}))
-        self.thread = threading.Thread(target=init, args=("127.0.0.1", 12345))
+        self.thread = threading.Thread(target=init, args=(self.ip, self.port))
         self.thread.daemon = True
         self.thread.start()
 

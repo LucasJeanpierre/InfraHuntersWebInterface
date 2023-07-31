@@ -11,7 +11,7 @@ def init(host, port):
     server_socket.bind((host, port))
     server_socket.listen(1)  # Number of clients that can wait in the queue
 
-    print("Server is waiting for a connection...")
+    print("Server is waiting for a connection on ip ", host , " and port ", port)
     conn, addr = server_socket.accept()
     print("Connected by:", addr)
 
