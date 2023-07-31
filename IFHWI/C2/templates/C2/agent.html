@@ -25,11 +25,15 @@
 
 <div id="shell"></div>
 
+<input type="text" name="" id="command" 
+    onkeyup="if (event.keyCode == 13) sendCommand()"
+>
+
 <h2>Agent Command list</h2>
 
 {% for command in agent.command_list %}
 <button class="commandButton" 
-        onclick="sendCommand('{{ command.name }}')"
+        onclick="sendButtonCommand('{{ command.syntax }}')"
 >
     {{ command.name }}
 </button>
@@ -42,7 +46,12 @@
     webSocket.onmessage = function (e) {
         const data = JSON.parse(e.data);
         console.log(data);
-        document.getElementById('shell').innerHTML += data.message + '<br>';
+
+        //replace > with &gt; and < with &lt;
+        data.message = data.message.replace(/>/g, '&gt;');
+        data.message = data.message.replace(/</g, '&lt;');
+        
+        document.getElementById('shell').innerHTML += '<code><pre>' + data.message + '</pre></code>';
     };
 
     webSocket.onopen = function (e) {
@@ -60,7 +69,17 @@
         console.log('Connection closed!');
     };
 
-    function sendCommand(command) {
+    function sendCommand() {
+        var command = document.getElementById('command').value;
+        document.getElementById('shell').innerHTML += "> " + command + '<br>';
+        webSocket.send(JSON.stringify({
+            'message': command
+        }));
+        document.getElementById('command').value = '';
+    }
+
+    function sendButtonCommand(command) {
+        document.getElementById('shell').innerHTML += "> " + command + '<br>';
         webSocket.send(JSON.stringify({
             'message': command
         }));
