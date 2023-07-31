@@ -21,10 +21,16 @@
     <li><b>Created at:</b> {{ agent.created }}</li>
 </ul>
 
+<h2>Agent Shell</h2>
+
+<div id="shell"></div>
+
 <h2>Agent Command list</h2>
 
 {% for command in agent.command_list %}
-<button class="commandButton">
+<button class="commandButton" 
+        onclick="sendCommand('{{ command.name }}')"
+>
     {{ command.name }}
 </button>
 {% endfor %}
@@ -36,6 +42,7 @@
     webSocket.onmessage = function (e) {
         const data = JSON.parse(e.data);
         console.log(data);
+        document.getElementById('shell').innerHTML += data.message + '<br>';
     };
 
     webSocket.onopen = function (e) {
@@ -52,6 +59,12 @@
     webSocket.onclose = function (e) {
         console.log('Connection closed!');
     };
+
+    function sendCommand(command) {
+        webSocket.send(JSON.stringify({
+            'message': command
+        }));
+    }
 
 
     
