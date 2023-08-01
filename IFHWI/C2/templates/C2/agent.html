@@ -57,7 +57,7 @@
     webSocket.onopen = function (e) {
         console.log('Connection established!');
         this.send(JSON.stringify({
-            'message': 'Hello World!'
+            'message': 'echo Agent Connection Validation.'
         }));
     };
 

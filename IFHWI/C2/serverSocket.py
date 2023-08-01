@@ -20,11 +20,11 @@ def init(host, port):
     print("shared_socket_conn:", sharedSocket.shared_socket_conn)
 
     channel_layer = get_channel_layer()
-    async_to_sync(channel_layer.group_send)("notification", {"type": "send_notification", "message": json.dumps({'message' : "Connected to " + str(addr)})})
+    async_to_sync(channel_layer.group_send)("notification", {"type": "send_notification", "message": json.dumps({'message' : "Connected to agent : " + str(addr)})})
 
     while True:
         try: 
-            data = conn.recv(4096).decode()
+            data = conn.recv(1024*32).decode()
             if not data:
                 break
             print("Received:", data)
