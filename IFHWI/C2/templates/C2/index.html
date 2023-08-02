@@ -1,7 +1,7 @@
 {% extends 'C2/base.html' %}
 {% block content %}
 
-<h1>Agents list</h1>
+<h1>InfraHunters Agents</h1>
 
 <table class="AgentsTable">
     <tr>
@@ -27,9 +27,9 @@
         <td>{{ agent.type }}</td>
         <td>
             {% if agent.is_active %}
-            <input type="checkbox" checked>
+            <input type="checkbox" checked disabled>
             {% else %}
-            <input type="checkbox">
+            <input type="checkbox" disabled>
             {% endif %}
         </td>
         <td>{{ agent.last_online }}</td>

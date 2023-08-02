@@ -9,13 +9,50 @@
     src: url('Roboto-Regular.ttf');
 }
 
+@font-face {
+    font-family: 'Handjet';
+    src: url('Handjet-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'Handjet-Bold';
+    src: url('Handjet-Bold.ttf');
+}
+
 body {
     font-family: 'Roboto';
+    background-color: #212121;
+    color: white;
+    padding: 5px;
 }
 
 .AgentsTable {
     width: 100%;
+    border: 2px solid #0fb7e5;
 }
+
+h1 {
+    padding: 20px;
+    text-align: center;
+    font-family: 'Handjet-Bold';
+    font-size: 75px;
+    color: #0fb7e5;
+}
+
+h1 a {
+    text-decoration: none;
+}
+
+h1 a:visited {
+    color: #0fb7e5;
+}
+
+h2 {
+    font-family: 'Handjet';
+    font-size: 50px;
+    color: #0fb7e5;
+}
+
 
 .AgentsTable td {
     text-align: center;
@@ -25,17 +62,25 @@ body {
     text-align: center;
 }
 
+.AgentsTable,
+th,
+td {
+    border-bottom: 2px solid #0fb7e5;
+    border-collapse: collapse;
+}
+
+
 .AgentsTable tr:nth-child(even) {
-    background-color: #f2f2f2;
+    background-color: #424242;
 }
 
 .AgentsTable tr:hover {
-    background-color: #ddd;
+    background-color: #000;
     cursor: pointer !important;
 }
 
 .AgentsTable th {
-    background-color: #4CAF50;
+    background-color: #0fb7e5;
     color: white;
 }
 
@@ -46,30 +91,95 @@ body {
     overflow: hidden;
 }
 
-h1 {
-    padding: 20px;
-    text-align: center;
-}
-
-
 .AgentInfo {
     padding: 20px;
 }
 
+.AgentInfo span {
+    color: #0fb7e5;
+}
+
+.AgentInfo li {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.buttonList {
+    display: flex;
+    justify-content: start;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
 .commandButton {
-    background-color: #838383;
-    margin: 2px;
-    border: none;
+    font-family: 'Roboto';
+    background-color: #212121;
+    border: 1px solid  #0fb7e5;
     color: white;
     padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
+    width: 100px;
     font-size: 16px;
+    font-weight: bold;
     display: flex;
+    justify-content: center;
+    transition-duration: 0.2s;
 }
 
 .commandButton:hover {
-    background-color: #444444;
+    background-color: #0fb7e5;
     cursor: pointer;
+    transition-duration: 0.2s;
+}
+
+
+#shell {
+    background-color: #212121;
+    border: 1px solid #0fb7e5 !important;
+    color: white;
+    font-family: 'Roboto';
+    font-size: 16px;
+    width: 100%;
+    height: 500px;
+    max-height: 500px;
+    overflow-y: auto;
+    border: none;
+    resize: none;
+    outline: none;
+    padding: 5px;
+}
+
+.commandInput {
+    background-color: #212121;
+    border: 1px solid #0fb7e5 !important;
+    border-top: none !important;
+    color: white;
+    font-family: 'Roboto';
+    font-size: 16px;
+    width: 100%;
+    height: 100%;
+    border: none;
+    resize: none;
+    outline: none;
+    padding: 5px;
+    margin-bottom: 20px;
+    padding-left: 20px;
+}
+
+.commandContainer {
+    position: relative;
+}
+
+.commandPrefix {
+    position: absolute;
+    left: 5px;
+    top: 25%;
+    transform: translateY(-50%);
+    font-size: 25px;
+    color: #0fb7e5;
+}
+
+.shellCommandPrefix {
+    color: #0fb7e5;
 }
