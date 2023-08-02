@@ -1,43 +1,49 @@
 {% extends 'C2/base.html' %}
 {% block content %}
 
-<h1>{{ agent.name }}</h1>
+<h1><a href="/">{{ agent.name }}</a></h1>
 
 <h2>Agent info</h2>
 
 <ul class="AgentInfo">
-    <li><b>Type:</b> {{ agent.type }}</li>
-    <li><b>Is Active:</b> {{ agent.is_active }}</li>
-    <li><b>Last Online:</b> {{ agent.last_online }}</li>
-    <li><b>Host:</b> {{ agent.host }}</li>
-    <li><b>IP:</b> {{ agent.ip }}</li>
-    <li><b>Port:</b> {{ agent.port }}</li>
-    <li><b>UID:</b> {{ agent.uid }}</li>
-    <li><b>GUID:</b> {{ agent.guid }}</li>
-    <li><b>OS:</b> {{ agent.os }}</li>
-    <li><b>OS Version:</b> {{ agent.os_version }}</li>
-    <li><b>Location:</b> {{ agent.location }}</li>
-    <li><b>Description:</b> {{ agent.description }}</li>
-    <li><b>Created at:</b> {{ agent.created }}</li>
+    <li><span>Type:</span> {{ agent.type }}</li>
+    <li><span>Is Active:</span> {{ agent.is_active }}</li>
+    <li><span>Last Online:</span> {{ agent.last_online }}</li>
+    <li><span>Host:</span> {{ agent.host }}</li>
+    <li><span>IP:</span> {{ agent.ip }}</li>
+    <li><span>Port:</span> {{ agent.port }}</li>
+    <li><span>UID:</span> {{ agent.uid }}</li>
+    <li><span>GUID:</span> {{ agent.guid }}</li>
+    <li><span>OS:</span> {{ agent.os }}</li>
+    <li><span>OS Version:</span> {{ agent.os_version }}</li>
+    <li><span>Location:</span> {{ agent.location }}</li>
+    <li><span>Description:</span> {{ agent.description }}</li>
+    <li><span>Created at:</span> {{ agent.created }}</li>
 </ul>
-
-<h2>Agent Shell</h2>
-
-<div id="shell"></div>
-
-<input type="text" name="" id="command" 
-    onkeyup="if (event.keyCode == 13) sendCommand()"
->
 
 <h2>Agent Command list</h2>
 
-{% for command in agent.command_list %}
-<button class="commandButton" 
-        onclick="sendButtonCommand('{{ command.syntax }}')"
->
-    {{ command.name }}
-</button>
-{% endfor %}
+<div class="buttonList">
+    {% for command in agent.command_list %}
+    <button class="commandButton" onclick="sendButtonCommand('{{ command.syntax }}')">
+        {{ command.name }}
+    </button>
+    {% endfor %}
+</div>
+
+<h2>Agent Shell</h2>
+
+<div id="shell">
+
+</div>
+
+<div class="commandContainer">
+    <span class="commandPrefix">></span>
+    <input type="text" class="commandInput" name="" id="command" onkeyup="if (event.keyCode == 13) sendCommand()">
+</div>
+
+
+
 
 <script>
 
@@ -50,14 +56,14 @@
         //replace > with &gt; and < with &lt;
         data.message = data.message.replace(/>/g, '&gt;');
         data.message = data.message.replace(/</g, '&lt;');
-        
+
         document.getElementById('shell').innerHTML += '<code><pre>' + data.message + '</pre></code>';
     };
 
     webSocket.onopen = function (e) {
         console.log('Connection established!');
         this.send(JSON.stringify({
-            'message': 'Hello World!'
+            'message': 'echo Agent Connection Validation.'
         }));
     };
 
@@ -71,7 +77,7 @@
 
     function sendCommand() {
         var command = document.getElementById('command').value;
-        document.getElementById('shell').innerHTML += "> " + command + '<br>';
+        document.getElementById('shell').innerHTML += '<span class="shellCommandPrefix">></span> ' + command + '<br>';
         webSocket.send(JSON.stringify({
             'message': command
         }));
@@ -79,14 +85,14 @@
     }
 
     function sendButtonCommand(command) {
-        document.getElementById('shell').innerHTML += "> " + command + '<br>';
+        document.getElementById('shell').innerHTML += '<span class="shellCommandPrefix">></span> ' + command + '<br>';
         webSocket.send(JSON.stringify({
             'message': command
         }));
     }
 
 
-    
+
 </script>
 
 
